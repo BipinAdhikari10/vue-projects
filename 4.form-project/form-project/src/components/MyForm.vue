@@ -1,13 +1,19 @@
 <template>
   <div>
-    <form class="container form-container">
+    <form class="container form-container" @submit.prevent="submitHandler">
       <div class="mb-3">
         <label for="name" class="form-label">Name:</label>
-        <input type="name" class="form-control" id="name" />
+        <input
+          v-model="formData.name"
+          type="name"
+          class="form-control"
+          id="name"
+        />
       </div>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email</label>
         <input
+          v-model="formData.email"
           type="email"
           class="form-control"
           id="exampleInputEmail1"
@@ -16,11 +22,17 @@
       </div>
       <div class="mb-3">
         <label for="address" class="form-label">Address</label>
-        <input type="text" class="form-control" id="address" />
+        <input
+          v-model="formData.address"
+          type="text"
+          class="form-control"
+          id="address"
+        />
       </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
         <input
+          v-model="formData.password"
           type="password"
           class="form-control"
           id="exampleInputPassword1"
@@ -29,19 +41,41 @@
 
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
+    <h2 class="container">My form data</h2>
+    <MyTable :informations="submittedData" />
   </div>
 </template>
 
 <script>
+import MyTable from "./MyTable.vue";
 export default {
   name: "MyForm",
 
-  components: {},
+  components: {
+    MyTable,
+  },
   data() {
-    return {};
+    return {
+      formData: {
+        name: "",
+        address: "",
+        email: "",
+        password: "",
+      },
+      submittedData: JSON.parse(localStorage.getItem("Informations")) || [],
+    };
   },
   props: {},
-  methods: {},
+  methods: {
+    submitHandler() {
+      this.submittedData.push(this.formData);
+      this.saveTolocalStorage();
+      this.formData = {};
+    },
+    saveTolocalStorage() {
+      localStorage.setItem("informations", JSON.stringify(this.submittedData));
+    },
+  },
 };
 </script>
 

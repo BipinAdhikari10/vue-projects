@@ -1,5 +1,7 @@
 <template>
-  <div>My footer</div>
+  <div>
+    <p class="para">copyright@2024</p>
+  </div>
 </template>
 
 <script>
@@ -15,4 +17,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.para {
+  background-color: #000;
+  padding: 30px;
+  color: #fff;
+  margin-top: 20px;
+  text-align: center;
+}
+</style>

@@ -2,26 +2,25 @@
   <div>
     <MyNavigation />
     <MyForm />
-
-    <MyTable />
     <MyFooter />
+    <MyTable />
   </div>
 </template>
 
 <script>
 import MyNavigation from "./MyNavigation.vue";
 import MyForm from "./MyForm.vue";
-import MyTable from "./MyTable.vue";
+
 import MyFooter from "./MyFooter.vue";
+// import MyTable from "./MyTable.vue";
 export default {
   name: "MyHome",
 
   components: {
     MyNavigation,
     MyForm,
-
-    MyTable,
     MyFooter,
+    // MyTable,
   },
 
   data() {
