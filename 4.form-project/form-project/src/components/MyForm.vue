@@ -39,7 +39,9 @@
         />
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">
+        {{ isEdit ? "Update" : "submit" }}
+      </button>
     </form>
     <h2 class="container">My form data</h2>
     <MyTable
@@ -67,12 +69,21 @@ export default {
         password: "",
       },
       submittedData: JSON.parse(localStorage.getItem("Informations")) || [],
+      isEdit: false,
+      editIndex: null,
     };
   },
   props: {},
   methods: {
     submitHandler() {
-      this.submittedData.push(this.formData);
+      if (this.isEdit) {
+        this.submittedData.splice(this.editIndex, 1, { ...this.formData });
+        this.isEdit = false;
+        this.editIndex = null;
+      } else {
+        this.submittedData.push(...this.formData);
+      }
+
       this.saveTolocalStorage();
       this.formData = {};
     },
@@ -80,7 +91,9 @@ export default {
       localStorage.setItem("informations", JSON.stringify(this.submittedData));
     },
     editHandler(index) {
-      console.log("edit", index);
+      this.formData = { ...this.submittedData[index] };
+      this.isEdit = true;
+      this.editIndex = index;
     },
     deleteHandler(index) {
       this.submittedData.splice(index, 1);
