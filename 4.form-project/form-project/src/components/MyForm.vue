@@ -42,7 +42,11 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <h2 class="container">My form data</h2>
-    <MyTable :informations="submittedData" />
+    <MyTable
+      :informations="submittedData"
+      @edit="editHandler"
+      @delete="deleteHandler"
+    />
   </div>
 </template>
 
@@ -74,6 +78,13 @@ export default {
     },
     saveTolocalStorage() {
       localStorage.setItem("informations", JSON.stringify(this.submittedData));
+    },
+    editHandler(index) {
+      console.log("edit", index);
+    },
+    deleteHandler(index) {
+      this.submittedData.splice(index, 1);
+      this.saveTolocalStorage();
     },
   },
 };

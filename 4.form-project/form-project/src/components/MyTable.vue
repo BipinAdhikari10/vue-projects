@@ -8,6 +8,7 @@
           <th scope="col">Address</th>
           <th scope="col">Email</th>
           <th scope="col">Password</th>
+          <th scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,21 @@
           <td>{{ element.address }}</td>
           <td>{{ element.email }}</td>
           <td>{{ element.password }}</td>
+          <td>
+            <button
+              class="btn btn-warning btn-sm"
+              @click="$emit('edit', index)"
+            >
+              Edit
+            </button>
+            <button
+              style="margin-left: 10px"
+              class="btn btn-danger btn-sm"
+              @click="$emit('delete', index)"
+            >
+              Delete
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
